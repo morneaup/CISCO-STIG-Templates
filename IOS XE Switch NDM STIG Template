@@ -73,6 +73,7 @@ line vty 0 4
  session-limit 3
  exec-timeout 9 0
 line vty 5 15
+ access-class MANAGEMENT_NET in
  session-limit 3
  exec-timeout 9 0
 !
