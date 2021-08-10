@@ -20,13 +20,14 @@ no service udp-small-servers
 no service pad
 !
 ! Vul ID: V-220543
-service password-encryption 
+service password-encryption
+enable secret <PASSWORD>
 !
 ! Vul ID:  V-220527
 login on-failure log
 login on-success log
 !
-! Vul ID: Adjust to organization storage policy
+! Vul ID: V-220547 Adjust to organization storage policy
 logging buffered 32768 informational
 !
 ! Vul ID: V-220555, V-220536
@@ -39,6 +40,7 @@ login block-for 900 attempts 3 within 120
 !
 ! Vul ID: V-220526
 logging userinfo
+!
 ! Vul ID: V-220519, V-220520, V-220521, V-220522, V-220530
 archive
  log config
@@ -59,12 +61,13 @@ username <USER_ID> privilege 15 common-criteria-policy PASSWORD_POLICY secret 9 
 !
 ! Vul ID: V-220518  - Recommend fine tunning to organization policy
 ip http max-connections 3
+!
 ! Vul ID: V-220544 - Recommend fine tunning lifetime and requests to organization policy
 ip http timeout-policy idle 600 life 180 requests 100
 !
 ! Vul ID: V-220523
 ip access-list extended MANAGEMENT_NET 
-permit ip x.x.x.0 0.0.0.255 any
+permit ip <NETWORK> 0.0.0.255 any
 deny ip any any log-input
 !
 ! Vul ID: V-220523, V-220518 - Adjust to organization policy
