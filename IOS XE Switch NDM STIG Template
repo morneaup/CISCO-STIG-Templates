@@ -41,6 +41,10 @@ login block-for 900 attempts 3 within 120
 ! Vul ID: V-220526
 logging userinfo
 !
+! Vul ID: V-220548
+logging trap informational
+logging host <IP>
+!
 ! Vul ID: V-220519, V-220520, V-220521, V-220522, V-220530
 archive
  log config
