@@ -19,6 +19,10 @@ no service tcp-small-servers
 no service udp-small-servers
 no service pad
 !
+! Vul ID: V-220550, V-220551
+clock timezone GMT 0 
+service timestamps log datetime localtime
+!
 ! Vul ID: V-220543
 service password-encryption
 enable secret <PASSWORD>
@@ -69,6 +73,14 @@ ip http max-connections 3
 ! Vul ID: V-220544 - Recommend fine tunning lifetime and requests to organization policy
 ip http timeout-policy idle 600 life 180 requests 100
 !
+! Vul ID: V-220553
+snmp-server group V3GROUP v3 priv read V3READ write V3WRITE
+snmp-server view V3READ iso included
+snmp-server view V3WRITE iso included
+snmp-server host <TRAPHOST1> version 3 auth V3USER
+snmp-server group V3GROUP v3 priv read V3READ write V3WRITE
+snmp-server user V3USER V3GROUP v3 auth sha <SNMP-PASS1> priv aes 256 <SNMP-PASS2>
+!
 ! Vul ID: V-220523
 ip access-list extended MANAGEMENT_NET 
 permit ip <NETWORK> 0.0.0.255 any
@@ -104,3 +116,10 @@ By using this IS (which includes any device attached to this IS), you consent to
 
 -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
 #
+!
+! Vul ID: V-220549, Vul ID: V-220554
+ntp authentication-key 1 md5 <NTPPASS1> 7
+ntp authenticate
+ntp trusted-key 1
+ntp server <NTP-IP1> key 1
+ntp server <NTP-IP2> key 1
