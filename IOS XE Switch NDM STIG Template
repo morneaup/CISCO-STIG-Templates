@@ -1,0 +1,98 @@
+! The following is an example SITG Template Configurations for:
+! Cisco IOS XE Switch NDM Security Technical Implementation Guide :: Version 2, Release: 1 Benchmark Date: 23 Oct 2020
+! It is always recommended to review the latest posted DISA STIG plubished information.
+! Change <VARIABLES> with organizational information.
+! 
+! Vul ID: V-220534
+no boot network
+no ip boot server
+no ip bootp server
+no ip dns server
+no ip identd
+no ip finger
+no ip http server
+no ip rcmd rcp-enable
+no ip rcmd rsh-enable
+no service config
+no service finger
+no service tcp-small-servers
+no service udp-small-servers
+no service pad
+!
+! Vul ID: V-220543
+service password-encryption 
+!
+! Vul ID:  V-220527
+login on-failure log
+login on-success log
+!
+! Vul ID: Adjust to organization storage policy
+logging buffered 32768 informational
+!
+! Vul ID: V-220555, V-220536
+ip ssh version 2
+ip ssh server algorithm encryption aes256-ctr aes192-ctr aes128-ctr
+ip ssh server algorithm mac hmac-sha2-512 hmac-sha2-256
+!
+! Vul ID: V-220524 
+login block-for 900 attempts 3 within 120
+!
+! Vul ID: V-220526
+logging userinfo
+! Vul ID: V-220519, V-220520, V-220521, V-220522, V-220530
+archive
+ log config
+  logging enable
+!
+! Vul ID: V-220537, V-220538, V-220539, V-220540, V-220541, V-220541
+aaa common-criteria policy PASSWORD_POLICY
+ min-length 15
+ max-length 127
+ numeric-count 1
+ upper-case 1
+ lower-case 1
+ special-case 1
+ char-changes 8
+!
+! Vul ID: V-220535
+username <USER_ID> privilege 15 common-criteria-policy PASSWORD_POLICY secret 9 <PASSWORD HASH>
+!
+! Vul ID: V-220518  - Recommend fine tunning to organization policy
+ip http max-connections 3
+! Vul ID: V-220544 - Recommend fine tunning lifetime and requests to organization policy
+ip http timeout-policy idle 600 life 180 requests 100
+!
+! Vul ID: V-220523
+ip access-list extended MANAGEMENT_NET 
+permit ip x.x.x.0 0.0.0.255 any
+deny ip any any log-input
+!
+! Vul ID: V-220523, V-220518 - Adjust to organization policy
+line vty 0 4
+ access-class MANAGEMENT_NET in
+ session-limit 3
+ exec-timeout 9 0
+line vty 5 15
+ session-limit 3
+ exec-timeout 9 0
+!
+! Vul ID: V-220531, V-220532, V-220533 - Evaluate Storage path before deploying
+logging persistent url flash:/logfile size 134217728 filesize 16384
+file privilege 15
+!
+! Vul ID: V-220525
+banner login #
+You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
+#
