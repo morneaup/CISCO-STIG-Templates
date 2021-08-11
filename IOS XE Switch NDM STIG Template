@@ -27,14 +27,14 @@ service timestamps log datetime localtime
 service password-encryption
 enable secret <PASSWORD>
 !
-! Vul ID:  V-220527
+! Vul ID:  V-220527, V-220560, V-220563
 login on-failure log
 login on-success log
 !
 ! Vul ID: V-220547 Adjust to organization storage policy
 logging buffered 32768 informational
 !
-! Vul ID: V-220555, V-220536
+! Vul ID: V-220555, V-220556, V-220536
 ip ssh version 2
 ip ssh server algorithm encryption aes256-ctr aes192-ctr aes128-ctr
 ip ssh server algorithm mac hmac-sha2-512 hmac-sha2-256
