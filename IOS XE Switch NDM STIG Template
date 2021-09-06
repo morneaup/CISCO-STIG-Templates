@@ -47,8 +47,8 @@ logging userinfo
 !
 ! Vul ID: V-220548
 logging trap informational
-logging host {{ LOGGING1-IP }}
-logging host {{ LOGGING2-IP }}
+logging host {{ LOGGING1_IP }}
+logging host {{ LOGGING2_IP }}
 !
 ! Vul ID: V-220519, V-220520, V-220521, V-220522, V-220530
 archive
@@ -66,7 +66,7 @@ aaa common-criteria policy PASSWORD_POLICY
  char-changes 8
 !
 ! Vul ID: V-220535
-username {{ USER1-ID }} privilege 15 common-criteria-policy PASSWORD_POLICY secret 9 {{ USER1-PASSWORD }}
+username {{ USER1_ID }} privilege 15 common-criteria-policy PASSWORD_POLICY secret 9 {{ USER1_PASSWORD }}
 !
 ! Vul ID: V-220518  - Recommend fine tunning to organization policy
 ip http max-connections 3
@@ -78,13 +78,13 @@ ip http timeout-policy idle 600 life 180 requests 100
 snmp-server group V3GROUP v3 priv read V3READ write V3WRITE
 snmp-server view V3READ iso included
 snmp-server view V3WRITE iso included
-snmp-server host {{ TRAP-HOST1 }} version 3 auth V3USER
+snmp-server host {{ TRAP_HOST1 }} version 3 auth V3USER
 snmp-server group V3GROUP v3 priv read V3READ write V3WRITE
-snmp-server user V3USER V3GROUP v3 auth sha {{ SNMP-PASS1 }} priv aes 256 {{ SNMP-PASS2 }}
+snmp-server user V3USER V3GROUP v3 auth sha {{ SNMP_PASS1 }} priv aes 256 {{ SNMP_PASS2 }}
 !
 ! Vul ID: V-220523
 ip access-list extended MANAGEMENT_NET 
-permit ip {{ MGMT-NETWORK1 }} 0.0.0.255 any
+permit ip {{ MGMT_NETWORK1 }} 0.0.0.255 any
 deny ip any any log-input
 !
 ! Vul ID: V-220523, V-220518 - Adjust to organization policy
@@ -119,8 +119,8 @@ By using this IS (which includes any device attached to this IS), you consent to
 #
 !
 ! Vul ID: V-220549, Vul ID: V-220554
-ntp authentication-key 1 md5 {{ NTP-PASS1 }} 7
+ntp authentication-key 1 md5 {{ NTP_PASS1 }} 7
 ntp authenticate
 ntp trusted-key 1
-ntp server {{ NTP-IP1 }} key 1
-ntp server {{ NTP-IP2 }} key 1
+ntp server {{ NTP_IP1 }} key 1
+ntp server {{ NTP_IP2 }} key 1
