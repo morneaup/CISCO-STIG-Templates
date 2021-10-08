@@ -1,0 +1,53 @@
+!
+! Vul ID: V-215807
+ip http secure-server 
+ip http max-connections {{ HTTP-MAX }} 
+!
+line vty 0 1 
+transport input ssh 
+line vty 2 4 
+transport input none
+!
+! Vul ID: V-215808, V-215809, V-215810, V-215811, V-215815, V-215819
+logging userinfo
+archive
+log config
+logging enable
+!
+! Vul ID: V-215812
+ip access-list extended MANAGEMENT_NET 
+permit ip {{ MGMT-NETWORK }} {{ MGMT-MASK }} any
+deny ip any any log-input
+!
+! Vul ID: V-215813
+login block-for 900 attempts 3 within 120
+!
+! Vul ID: V-215814
+banner login #
+Enter TEXT message. End with the character '#'.
+You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details. 
+#
+!
+! Vul ID: V-215816
+login on-failure log
+login on-success log
+!
+! Vul ID: V-215817
+service timestamps log datetime localtime
+!
+! Vul ID: V-215818, All ACL's must be extended when possible and have log-input
+ip access-list extended BLOCK_INBOUND
+deny icmp any any log-input
+!
