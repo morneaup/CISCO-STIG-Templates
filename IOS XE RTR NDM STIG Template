@@ -1,4 +1,4 @@
-!
+! Cisco IOS XE Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
 ! Vul ID: V-215807
 ip http secure-server 
 ip http max-connections {{ HTTP-MAX }} 
@@ -8,7 +8,7 @@ transport input ssh
 line vty 2 4 
 transport input none
 !
-! Vul ID: V-215808, V-215809, V-215810, V-215811, V-215815, V-215819
+! Vul ID: V-215808, V-215809, V-215810, V-215811, V-215815, V-215819, V-215834, V-215835
 logging userinfo
 archive
 log config
@@ -51,3 +51,87 @@ service timestamps log datetime localtime
 ip access-list extended BLOCK_INBOUND
 deny icmp any any log-input
 !
+! Vul ID: V-215820, V-215821, V-215822, Only if logging presistent is present.
+logging persistent url disk0:/logfile size 134217728 filesize 16384
+file privilege 10
+!
+! Vul ID: V-215823
+no boot network
+no ip boot server
+no ip bootp server
+no ip dns server
+no ip identd
+no ip finger
+no ip http server
+no ip rcmd rcp-enable
+no ip rcmd rsh-enable
+no service config
+no service finger
+no service tcp-small-servers
+no service udp-small-servers
+!
+! Vul ID: V-215824, V-215826, V-215827, V-215828, V-215829, V-215830, V-215831
+aaa common-criteria policy PASSWORD_POLICY
+min-length 15
+upper-case 1
+lower-case 1
+numeric-count 1
+special-case 1
+char-changes 8
+!
+username {{ USERNAME1 }} privilege nn common-criteria-policy PASSWORD_POLICY password {{ USER-PASS1 }}
+aaa authentication login default group tacacs+ local
+!
+! Vul ID: V-215832
+service password-encryption
+!
+! Vul ID: V-215833
+ip http secure-server
+ip http timeout-policy idle 600 life {{ NNNN }} requests {{ NN }}
+!
+line con 0
+exec-timeout 10 0
+line vty 0 4
+exec-timeout 10 0
+!
+! Vul ID: V-215825
+ip ssh version 2
+ip ssh server algorithm encryption aes128-cbc aes192-cbc aes192-ctr
+!
+! Vul ID: V-215836
+logging buffered {{ LOG-BUFFER }} informational
+!
+! Vul ID: V-215837
+logging trap informational
+logging {{ LOG-HOST-IP1 }}
+logging {{ LOG-HOST-IP2 }}
+!
+! Vul ID: V-215838, V-215843
+ntp authentication-key 1 md5 {{ NTP-MD5 }}
+ntp authenticate
+ntp trusted-key 1
+ntp server {{ NTP-SERVER-IP1 }} key 1
+ntp server {{ NTP-SERVER-IP2 }} key 1
+!
+! Vul ID: V-215839, V-215840
+clock timezone GMT 0
+service timestamps log datetime localtime
+!
+! Vul ID: V-215841
+snmp-server group V3GROUP v3 auth read V3READ write V3WRITE
+snmp-server user V3USER V3GROUP v3 auth sha {{ SNMP-AUTH1 }} priv aes 256 {{ SNMP-PRIV1 }}
+snmp-server view V3READ iso included
+snmp-server view V3WRITE iso included
+snmp-server host {{ NMS-HOST1 }} version 3 auth V3USER
+!
+! Vul ID: V-215844, V-215845
+! SSH Config
+ip ssh version 2
+ip ssh server algorithm encryption aes128-cbc aes128-ctr aes192-cbc aes192-ctr
+ip ssh server algorithm mac hmac-sha1-96
+! HTTPS Config 
+! ip http secure-server
+ip http secure-ciphersuite aes-128-cbc-sha 
+! ip http secure-client-auth
+! ip http secure-trustpoint CA_XXX
+
