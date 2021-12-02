@@ -87,16 +87,6 @@ ip access-list extended MANAGEMENT_NET
 permit ip {{ MGMT_NETWORK1 }} 0.0.0.255 any
 deny ip any any log-input
 !
-! Vul ID: V-220523, V-220518 - Adjust to organization policy
-line vty 0 4
- access-class MANAGEMENT_NET in
- session-limit 3
- exec-timeout 9 0
-line vty 5 15
- access-class MANAGEMENT_NET in
- session-limit 3
- exec-timeout 9 0
-!
 ! Vul ID: V-220531, V-220532, V-220533 - Evaluate Storage path before deploying
 logging persistent url {{ PATH1 }}:/logfile size 134217728 filesize 16384
 file privilege 15
@@ -117,6 +107,16 @@ By using this IS (which includes any device attached to this IS), you consent to
 
 -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details.
 #
+!
+! Vul ID: V-220523, V-220518 - Adjust to organization policy
+line vty 0 4
+ access-class MANAGEMENT_NET in
+ session-limit 3
+ exec-timeout 9 0
+line vty 5 15
+ access-class MANAGEMENT_NET in
+ session-limit 3
+ exec-timeout 9 0
 !
 ! Vul ID: V-220549, Vul ID: V-220554
 ntp authentication-key 1 md5 {{ NTP_PASS1 }} 7
