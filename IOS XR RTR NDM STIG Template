@@ -16,7 +16,6 @@ transport input ssh
 !
 ! Vul ID: V-216525
 banner login #
-Enter TEXT message. End with the character '#'.
 You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
 
 By using this IS (which includes any device attached to this IS), you consent to the following conditions:
