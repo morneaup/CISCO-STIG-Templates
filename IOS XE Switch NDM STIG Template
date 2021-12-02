@@ -69,7 +69,7 @@ aaa common-criteria policy PASSWORD_POLICY
 username {{ USER1_ID }} privilege 15 common-criteria-policy PASSWORD_POLICY secret 9 {{ USER1_PASSWORD }}
 !
 ! Vul ID: V-220518  - Recommend fine tunning to organization policy
-ip http max-connections 3
+ip http max-connections {{ HTTP-MAX }} 
 !
 ! Vul ID: V-220544 - Recommend fine tunning lifetime and requests to organization policy
 ip http timeout-policy idle 600 life 180 requests 100
