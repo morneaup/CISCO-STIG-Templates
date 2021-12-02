@@ -1,4 +1,5 @@
 ! Cisco IOS XE Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
+! This script uses JINJA2 format {{ VARIABLES }}.  Replace the variables with organizational information.
 ! Vul ID: V-215807
 ip http secure-server 
 ip http max-connections {{ HTTP-MAX }} 
