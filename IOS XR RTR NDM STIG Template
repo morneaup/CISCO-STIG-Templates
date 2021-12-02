@@ -3,7 +3,7 @@
 ! Vul ID: V-216522,  Recommend 3
 ssh server session-limit {{ SSH-LIMIT }}
 !
-! Vul ID: V-216523
+! Vul ID: V-216523, V-216532
 ipv4 access-list MANAGEMENT_NET 
 10 permit ipv4 {{ MGMT-NETWORK }} {{ MGMT-MASK }} any
 20 deny ipv4 any any log-input
@@ -11,8 +11,15 @@ ipv4 access-list MANAGEMENT_NET
 vty-pool default 0 4
 !
 line default
-access-class ingress MANAGEMENT_NET
-transport input ssh
+ transport input ssh
+ exec-timeout 10 0
+ access-class ingress MANAGEMENT_NET
+ transport input ssh
+line console
+ exec-timeout 10 0
+!
+! Vul ID: V-216531
+ssh server v2
 !
 ! Vul ID: V-216525
 banner login #
@@ -43,3 +50,11 @@ no service ipv4 tcp-small-servers
 no service ipv4 udp-small-servers
 no http client vrf xxxxx
 no telnet ipv4 server
+!
+! Vul ID: V-216533
+logging buffered {{ BUFFER_SIZE }}
+logging archive
+severity notifications
+device harddisk
+archive-size 100 
+file-size 10
