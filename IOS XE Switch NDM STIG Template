@@ -98,7 +98,7 @@ line vty 5 15
  exec-timeout 9 0
 !
 ! Vul ID: V-220531, V-220532, V-220533 - Evaluate Storage path before deploying
-logging persistent url flash:/logfile size 134217728 filesize 16384
+logging persistent url {{ PATH1 }}:/logfile size 134217728 filesize 16384
 file privilege 15
 !
 ! Vul ID: V-220525
