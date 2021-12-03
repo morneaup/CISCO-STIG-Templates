@@ -1,5 +1,5 @@
 ! The following is an example SITG Template Configurations for:
-! Cisco IOS XE Switch NDM Security Technical Implementation Guide :: Version 2, Release: 1 Benchmark Date: 23 Oct 2020
+! Cisco IOS XE Switch L2S Security Technical Implementation Guide :: Version 2, Release: 1 Benchmark Date: 23 Apr 2021
 ! It is always recommended to review the latest posted DISA STIG plubished information.
 ! This script uses JINJA2 format {{ VARIABLES }}.  Replace the variables with organizational information.
 ! 
