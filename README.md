@@ -1,4 +1,4 @@
-# STIG-Configurations
+# STIG-TEMPLATES
 The following are example JINJA2 formatted STIG templates.
 
   •	Cisco IOS XE Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
