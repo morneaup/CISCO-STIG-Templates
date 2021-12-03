@@ -1,5 +1,5 @@
 # STIG-Configurations
-This is currently in draft, but I am making a respository of STIG templates that use JINJA2 formatting.
+The following are example JINJA2 formatted STIG templates.
 
   •	Cisco IOS XE Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
   
@@ -7,3 +7,4 @@ This is currently in draft, but I am making a respository of STIG templates that
   
   •	Cisco IOS XR Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
 
+Please modify for your organizational use.
