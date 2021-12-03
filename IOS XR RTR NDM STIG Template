@@ -11,7 +11,7 @@ aaa authentication login default group tacacs+ local
 !
 ! Vul ID: V-216523, V-216532
 ipv4 access-list MANAGEMENT_NET 
-10 permit ipv4 {{ MGMT-NETWORK }} {{ MGMT-MASK }} any
+10 permit ipv4 {{ MGMT-NETWORK1 }} {{ MGMT-MASK }} any
 20 deny ipv4 any any log-input
 !
 vty-pool default 0 4
