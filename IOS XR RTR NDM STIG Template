@@ -1,4 +1,6 @@
+! The following is an example SITG Template Configurations for:
 ! Cisco IOS XR Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
+! It is always recommended to review the latest posted DISA STIG plubished information.
 ! This script uses JINJA2 format {{ VARIABLES }}.  Replace the variables with organizational information.
 ! 
 ! Vul ID: V-216522,  Recommend 3
