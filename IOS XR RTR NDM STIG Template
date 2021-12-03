@@ -1,7 +1,13 @@
+! Cisco IOS XR Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
 ! This script uses JINJA2 format {{ VARIABLES }}.  Replace the variables with organizational information.
 ! 
 ! Vul ID: V-216522,  Recommend 3
 ssh server session-limit {{ SSH-LIMIT }}
+!
+! Vul ID: V-216530
+username {{ BREAK_GLASS_USER }} group netadmin 
+username {{ BREAK_GLASS_USER }} secret {{ BREAK_GLASS_PASS }}
+aaa authentication login default group tacacs+ local
 !
 ! Vul ID: V-216523, V-216532
 ipv4 access-list MANAGEMENT_NET 
@@ -18,7 +24,7 @@ line default
 line console
  exec-timeout 10 0
 !
-! Vul ID: V-216531
+! Vul ID: V-216531, V-216541, V-216542
 ssh server v2
 !
 ! Vul ID: V-216525
@@ -38,11 +44,13 @@ By using this IS (which includes any device attached to this IS), you consent to
 -Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details. 
 #
 !
-! Vul ID: V-216526
+! Vul ID: V-216526, V-216534, V-216543, V-216547
 logging buffered informational
-logging {{ LOG-HOST1 }} vrf default severity info
+logging {{ LOG-HOST1 }} vrf {{ LOG_VRF }} severity info
+logging {{ LOG-HOST2 }} vrf {{ LOG_VRF }} severity info
 !
-! Vul ID: V-216527
+! Vul ID: V-216527, V-216536, V-216537
+clock timezone UTC 0
 service timestamps log datetime localtime
 !
 ! Vul ID: V-216529
@@ -58,3 +66,24 @@ severity notifications
 device harddisk
 archive-size 100 
 file-size 10
+!
+! Vul ID: V-216538, V-216539
+snmp-server group V3GROUP v3 auth read V3READ write V3WRITE
+snmp-server user V3USER V3GROUP v3 auth sha {{ SNMPUSR1_SHA }} priv aes 256 {{ SNMPUSR1_AES }}
+snmp-server view V3READ iso included
+snmp-server view V3WRITE iso included
+snmp-server host {{ SNMP_TRAP1 }} version 3 auth V3USER
+!
+! Vul ID: V-216535, V-216540
+ntp authenticate
+ntp authentication-key 1 md5 {{ NTP_MD5 }}
+ntp trusted-key
+ntp server {{ NTP1 }} key 1
+ntp server {{ NTP2 }} key 1
+!
+! Vul ID: V-216545	
+configuration commit auto-save filename tftp://{{ TFTP_SERVER1 }}
+!
+! Vul ID: V-216546
+!crypto ca trustpoint CA_X
+!enrollment url http://{{ TRUSTPOINT1_PATH }}
