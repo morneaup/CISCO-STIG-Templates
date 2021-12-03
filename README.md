@@ -1,5 +1,5 @@
 # STIG-TEMPLATES
-The following are example JINJA2 formatted STIG templates for CISCO IOS-XE and IOS-XR
+The following are boiler plate example JINJA2 formatted STIG templates for CISCO IOS-XE and IOS-XR
 
   •	Cisco IOS XE Router NDM Security Technical Implementation Guide :: Version 2, Release: 2 Benchmark Date: 23 Apr 2021
   
