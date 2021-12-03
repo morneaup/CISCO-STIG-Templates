@@ -8,9 +8,9 @@ ip http secure-server
 ip http max-connections {{ HTTP-MAX }} 
 !
 line vty 0 1 
-transport input ssh 
+ transport input ssh 
 line vty 2 4 
-transport input none
+ transport input none
 !
 ! Vul ID: V-215808, V-215809, V-215810, V-215811, V-215815, V-215819, V-215834, V-215835
 logging userinfo
@@ -75,14 +75,14 @@ no service udp-small-servers
 !
 ! Vul ID: V-215824, V-215826, V-215827, V-215828, V-215829, V-215830, V-215831
 aaa common-criteria policy PASSWORD_POLICY
-min-length 15
-upper-case 1
-lower-case 1
-numeric-count 1
-special-case 1
-char-changes 8
+ min-length 15
+ upper-case 1
+ lower-case 1
+ numeric-count 1
+ special-case 1
+ char-changes 8
 !
-username {{ USERNAME1 }} privilege nn common-criteria-policy PASSWORD_POLICY password {{ USER-PASS1 }}
+username {{ USERNAME1 }} privilege {{ USR1_PRIV }} common-criteria-policy PASSWORD_POLICY password {{ USER-PASS1 }}
 aaa authentication login default group tacacs+ local
 !
 ! Vul ID: V-215832
@@ -93,9 +93,9 @@ ip http secure-server
 ip http timeout-policy idle 600 life {{ NNNN }} requests {{ NN }}
 !
 line con 0
-exec-timeout 10 0
+ exec-timeout 10 0
 line vty 0 4
-exec-timeout 10 0
+ exec-timeout 10 0
 !
 ! Vul ID: V-215825
 ip ssh version 2
@@ -122,7 +122,7 @@ service timestamps log datetime localtime
 !
 ! Vul ID: V-215841
 snmp-server group V3GROUP v3 auth read V3READ write V3WRITE
-snmp-server user V3USER V3GROUP v3 auth sha {{ SNMP-AUTH1 }} priv aes 256 {{ SNMP-PRIV1 }}
+snmp-server user V3USER V3GROUP v3 auth sha {{ SNMP1-SHA }} priv aes 256 {{ SNMP1-AES }}
 snmp-server view V3READ iso included
 snmp-server view V3WRITE iso included
 snmp-server host {{ NMS-HOST1 }} version 3 auth V3USER
@@ -136,5 +136,5 @@ ip ssh server algorithm mac hmac-sha1-96
 ip http secure-server
 ip http secure-ciphersuite aes-128-cbc-sha 
 ! ip http secure-client-auth
-! ip http secure-trustpoint CA_XXX
+! ip http secure-trustpoint {{ CA_NAME1 }}
 
